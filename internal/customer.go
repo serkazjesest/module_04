@@ -12,6 +12,16 @@ type Customer struct {
 	discount bool
 }
 
+func NewCustomer(name string, age int, balance int, debt int, discount bool) *Customer {
+	return &Customer{
+		Name:     name,
+		Age:      age,
+		Balance:  balance,
+		Debt:     debt,
+		discount: discount,
+	}
+}
+
 func (cust *Customer) CalcDiscount() (int, error) {
 	if !cust.discount {
 		return 0, errors.New("discount not available")
@@ -28,15 +38,5 @@ func (cust *Customer) CalcPrice(price int) (int, error) {
 		return 0, err
 	} else {
 		return price - res, nil
-	}
-}
-
-func NewCustomer(name string, age int, balance int, debt int, discount bool) *Customer {
-	return &Customer{
-		Name:     name,
-		Age:      age,
-		Balance:  balance,
-		Debt:     debt,
-		discount: discount,
 	}
 }

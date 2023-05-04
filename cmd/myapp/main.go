@@ -11,5 +11,5 @@ func main() {
 	cust.CalcDiscount()
 
 	fmt.Printf("%+v\n", cust)
-	fmt.Println(internal.CalcPrice(cust, 20000))
+	fmt.Println(cust.CalcPrice(20000))
 }

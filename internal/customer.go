@@ -23,6 +23,14 @@ func (cust *Customer) CalcDiscount() (int, error) {
 	return result, nil
 }
 
+func (cust *Customer) CalcPrice(price int) (int, error) {
+	if res, err := cust.CalcDiscount(); err != nil {
+		return 0, err
+	} else {
+		return price - res, nil
+	}
+}
+
 func NewCustomer(name string, age int, balance int, debt int, discount bool) *Customer {
 	return &Customer{
 		Name:     name,

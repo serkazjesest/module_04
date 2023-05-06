@@ -7,8 +7,7 @@ import (
 )
 
 func main() {
-	overduer := internal.NewOverduer(2000, 0)
-	cust := internal.NewCustomer("Dmitry", 23, *overduer, true)
+	cust := internal.NewCustomer("Dmitry", 23, 10000, 0, true)
 
 	cust.CalcDiscount()
 

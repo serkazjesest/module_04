@@ -11,11 +11,19 @@ type Customer struct {
 	discount bool
 }
 
-func NewCustomer(name string, age int, overduer Overduer, discount bool) *Customer {
+type Overduer struct {
+	balance int
+	debt    int
+}
+
+func NewCustomer(name string, age int, balance int, debt int, discount bool) *Customer {
 	return &Customer{
-		Name:     name,
-		Age:      age,
-		Overduer: &overduer,
+		Name: name,
+		Age:  age,
+		Overduer: &Overduer{
+			balance: balance,
+			debt:    debt,
+		},
 		discount: discount,
 	}
 }

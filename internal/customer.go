@@ -8,7 +8,7 @@ type Customer struct {
 	Name     string
 	Age      int
 	Balance  int
-	Debt     int
+	debt     int
 	discount bool
 }
 
@@ -17,7 +17,7 @@ func NewCustomer(name string, age int, balance int, debt int, discount bool) *Cu
 		Name:     name,
 		Age:      age,
 		Balance:  balance,
-		Debt:     debt,
+		debt:     debt,
 		discount: discount,
 	}
 }
@@ -26,7 +26,7 @@ func (cust *Customer) CalcDiscount() (int, error) {
 	if !cust.discount {
 		return 0, errors.New("discount not available")
 	}
-	result := DEFAULT_DISCOUNT - cust.Debt
+	result := DEFAULT_DISCOUNT - cust.debt
 	if result < 0 {
 		return 0, nil
 	}
@@ -39,4 +39,10 @@ func (cust *Customer) CalcPrice(price int) (int, error) {
 	} else {
 		return price - res, nil
 	}
+}
+
+func (c *Customer) WrOffDebt() error {
+	c.debt = 0
+
+	return nil
 }

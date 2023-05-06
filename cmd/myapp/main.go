@@ -17,10 +17,10 @@ func main() {
 	fmt.Println(cust.CalcPrice(20000))
 }
 
-func startTransactionDynamic(cust interface{}) error {
-	customer, ok := cust.(internal.Debtor)
+func startTransactionDynamic(i interface{}) error {
+	debt, ok := i.(internal.Debtor)
 	if !ok {
 		return errors.New("incorrect type")
 	}
-	return customer.WrOffDebt()
+	return debt.WrOffDebt()
 }

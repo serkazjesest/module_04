@@ -18,7 +18,7 @@ func main() {
 }
 
 func startTransactionDynamic(cust interface{}) error {
-	customer, ok := cust.(*internal.Customer)
+	customer, ok := cust.(internal.Debtor)
 	if !ok {
 		return errors.New("incorrect type")
 	}

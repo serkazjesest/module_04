@@ -7,7 +7,7 @@ const DEFAULT_DISCOUNT = 500
 type Customer struct {
 	Name     string
 	Age      int
-	Balance  int
+	balance  int
 	debt     int
 	discount bool
 }
@@ -16,7 +16,7 @@ func NewCustomer(name string, age int, balance int, debt int, discount bool) *Cu
 	return &Customer{
 		Name:     name,
 		Age:      age,
-		Balance:  balance,
+		balance:  balance,
 		debt:     debt,
 		discount: discount,
 	}
@@ -42,6 +42,11 @@ func (cust *Customer) CalcPrice(price int) (int, error) {
 }
 
 func (c *Customer) WrOffDebt() error {
+	if c.debt >= c.balance {
+		return errors.New("not possible write off")
+	}
+
+	c.balance -= c.debt
 	c.debt = 0
 
 	return nil

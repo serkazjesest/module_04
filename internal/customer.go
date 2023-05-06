@@ -5,19 +5,17 @@ import "errors"
 const DEFAULT_DISCOUNT = 500
 
 type Customer struct {
-	Name     string
-	Age      int
-	Balance  int
-	debt     int
+	Name string
+	Age  int
+	*Overduer
 	discount bool
 }
 
-func NewCustomer(name string, age int, balance int, debt int, discount bool) *Customer {
+func NewCustomer(name string, age int, overduer Overduer, discount bool) *Customer {
 	return &Customer{
 		Name:     name,
 		Age:      age,
-		Balance:  balance,
-		debt:     debt,
+		Overduer: &overduer,
 		discount: discount,
 	}
 }
@@ -41,8 +39,13 @@ func (cust *Customer) CalcPrice(price int) (int, error) {
 	}
 }
 
-func (c *Customer) WrOffDebt() error {
-	c.debt = 0
+func (cust *Customer) WrOffDebt() error {
+	if cust.debt >= cust.balance {
+		return errors.New("not possible write off")
+	}
+
+	cust.balance -= cust.debt
+	cust.debt = 0
 
 	return nil
 }

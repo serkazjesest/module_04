@@ -20,7 +20,7 @@ func (e *limitError) Error() string {
 }
 
 func main() {
-	limit := 2
+	limit := 5
 
 	count, err := readerCountLines(limit)
 	if err != nil {
@@ -58,7 +58,7 @@ func readerCountLines(limit int) (count int, err error) {
 			err = fmt.Errorf("cant'read line %v: %s", count, err)
 			break
 		}
-		if err == io.EOF {
+		if errors.Is(err, io.EOF) {
 			err = nil
 			break
 		}
